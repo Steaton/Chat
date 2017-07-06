@@ -1,9 +1,26 @@
 <title>Chat</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script type="text/javascript" src="chat.js"></script>
+<script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/2.3.4/lib/stomp.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="chat.js"></script>
 
-<div><input type="text" id="message" placeholder="type a message"/></div>
-<div id="chat"></div>
+<div>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="enter username"/>
+        <input type="submit" value="Login"/>
+    </form>
+</div>
+<div>
+    <textarea id="chat" rows="20" cols="30"></textarea>
+    <textarea id="currentUsers" rows="20" cols="10"></textarea>
+</div>
+<div>
+    <form id="sendMessageForm">
+        <input type="text" id="message" placeholder="type a message"/>
+        <input type="submit" value="Send"/>
+    </form>
+</div>
+
+
 

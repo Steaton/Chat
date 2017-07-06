@@ -1,7 +1,5 @@
 $(document).ready(function() {
-    var username = prompt('Enter Username:', username) || '';
-
-    var ws = new SockJS('/chat');
+    var ws = new SockJS('/chat', 9090);
     var stompClient = Stomp.over(ws);
 
     stompClient.connect({}, function(frame) {
@@ -12,5 +10,9 @@ $(document).ready(function() {
 
     function sendForm() {
         stompClient.send("/topic/chat", {}, $('#message').val());
+    };
+
+    function connect() {
+        stompClient.send("/queue/connect", {}, $('username').val());
     };
 });
