@@ -10,6 +10,8 @@ import java.util.Set;
 @ServerEndpoint("/chat")
 public class ChatEndpoint {
 
+    public static final String USERNAME_PARAMETER = "username";
+
     private static Set<Session> connectedUsers = Collections.synchronizedSet(new HashSet<Session>());
 
     public ChatEndpoint() {
@@ -27,8 +29,7 @@ public class ChatEndpoint {
     public Set<String> getConnectedUserUsernames() {
         Set<String> usernames = new HashSet<>();
         for (Session connectedUser : connectedUsers) {
-            String username = (String) connectedUser.getUserProperties().get("username");
-            usernames.add(username);
+            usernames.add((String) connectedUser.getUserProperties().get(USERNAME_PARAMETER));
         }
         return usernames;
     }
