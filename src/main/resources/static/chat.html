@@ -1,26 +1,74 @@
 <title>Chat</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.4/lib/stomp.min.js"></script>
 <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="chat.js"></script>
 
-<div>
-    <form id="loginForm">
-        <input type="text" id="username" placeholder="enter username"/>
-        <input type="submit" value="Login"/>
-    </form>
-</div>
-<div>
-    <textarea id="chat" rows="20" cols="30"></textarea>
-    <textarea id="currentUsers" rows="20" cols="10"></textarea>
-</div>
-<div>
-    <form id="sendMessageForm">
-        <input type="text" id="message" placeholder="type a message"/>
-        <input type="submit" value="Send"/>
-    </form>
-</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Affinitas Chat</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
+<div class="container">
+    <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12 centered">
+        <div class="row">
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="enter username" class="form-control"/>
+                    <span class="input-group-btn">
+                        <button type="button" id="connectButton" class="btn btn-primary">Connect</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="panel panel-default">
 
+                            <div class="panel-body"
+                                 style="height: 350px; overflow-y: scroll;">
 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div class="panel panel-default">
+                            <div id="newMessages" class="panel-body" style="height: 350px; overflow-y: scroll;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <form id="sendMessageForm">
+                <div class="input-group">
+                    <input type="text" id="message" placeholder="type a message" class="form-control"/>
+                    <span class="input-group-btn">
+                        <button type="button" id="sendMessage" class="btn btn-primary">Send</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

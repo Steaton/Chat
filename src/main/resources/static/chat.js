@@ -1,7 +1,9 @@
 $(document).ready(function() {
-    var ws = new SockJS('/chat', 9090);
-    var stompClient = Stomp.over(ws);
+    var websocket = null;
+    var stompClient = null;
 
+    websocket = new SockJS('/chat');
+    stompClient = Stomp.over(websocket);
     stompClient.connect({}, function(frame) {
         stompClient.subscribe('/topic/chat', function(message) {
             alert(message);
@@ -13,6 +15,13 @@ $(document).ready(function() {
     };
 
     function connect() {
-        stompClient.send("/queue/connect", {}, $('username').val());
+        var un = $('#username').val();
+        alert(un);
+        stompClient.send("/queue/connect", {}, un);
     };
+
+    $("#connectButton").on("click", function() {
+        connect();
+    })
 });
+
