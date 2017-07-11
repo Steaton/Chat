@@ -10,6 +10,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.6</version>
+        </dependency>
+
+        <!-- Spring Boot -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
             <version>1.5.4.RELEASE</version>
@@ -30,6 +37,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>1.5.4.RELEASE</version>
         </dependency>
+
+        <!-- Webjars -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
