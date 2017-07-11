@@ -1,4 +1,4 @@
-package co.de.affinitas.chat;
+package co.de.affinitas.chat.messaging;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

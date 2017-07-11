@@ -1,5 +1,8 @@
 package co.de.affinitas.chat.participants;
 
+import co.de.affinitas.chat.participants.exception.NotAlphaNumericException;
+import co.de.affinitas.chat.participants.exception.UserAlreadyConnectedException;
+import co.de.affinitas.chat.participants.model.ConnectedUsers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

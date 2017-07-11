@@ -1,5 +1,7 @@
-package co.de.affinitas.chat.participants;
+package co.de.affinitas.chat.participants.model;
 
+import co.de.affinitas.chat.participants.exception.NotAlphaNumericException;
+import co.de.affinitas.chat.participants.exception.UserAlreadyConnectedException;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.VisibleForTesting;
 

@@ -16,8 +16,13 @@ $(document).ready(function() {
         websocket = new SockJS('/ws');
         stompClient = Stomp.over(websocket);
         stompClient.connect({username: username}, function(frame) {
-            stompClient.subscribe('/topic/chat', function(message) {
+            stompClient.subscribe('/topic/chat.message', function(message) {
                 $("#newMessages ul").append('<li class="list-group-item">' + message.body + '</li>');
+            })
+            stompClient.subscribe('/app/chat.participants', function(message) {
+            })
+            stompClient.subscribe('/topic/chat.participants', function(message) {
+                $("#userList ul").append('<li class="list-group-item">' + message.body + '</li>');
             })
         });
         connected();
@@ -32,7 +37,7 @@ $(document).ready(function() {
 
     function sendMessage() {
         var message = $('#message').val();
-        stompClient.send("/topic/chat", {}, message);
+        stompClient.send("/app/chat.message", {}, message);
     }
 
     $("#connectButton").on("click", function() {

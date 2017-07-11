@@ -1,4 +1,4 @@
-package co.de.affinitas.chat.participants;
+package co.de.affinitas.chat.participants.exception;
 
 public class UserAlreadyConnectedException extends Exception {
 
