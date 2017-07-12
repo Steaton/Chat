@@ -7,8 +7,23 @@ $(document).ready(function() {
         $("#sendMessage").prop("disabled", true);
     }
 
-    function sendForm() {
-        stompClient.send("/topic/chat", {}, $('#message').val());
+    function populateParticipants(participants) {
+        $('#userList ul').empty();
+        $.each(participants, function (i, participant) {
+            var li = ('<span>' + participant + '</span><br>');
+            $('#userList ul').append(li);
+        })
+    }
+
+    function setupSubscriptions(stompClient) {
+        stompClient.subscribe('/topic/chat.message', function(message) {
+            $("#newMessages ul").append('<li class="list-group-item">' + message.body + '</li>');
+        })
+        stompClient.subscribe('/app/chat.participants', function(message) {
+        })
+        stompClient.subscribe('/topic/chat.participants', function(message) {
+                populateParticipants(JSON.parse(message.body));
+        })
     }
 
     function connect() {
@@ -16,14 +31,7 @@ $(document).ready(function() {
         websocket = new SockJS('/ws');
         stompClient = Stomp.over(websocket);
         stompClient.connect({username: username}, function(frame) {
-            stompClient.subscribe('/topic/chat.message', function(message) {
-                $("#newMessages ul").append('<li class="list-group-item">' + message.body + '</li>');
-            })
-            stompClient.subscribe('/app/chat.participants', function(message) {
-            })
-            stompClient.subscribe('/topic/chat.participants', function(message) {
-                $("#userList ul").append('<li class="list-group-item">' + message.body + '</li>');
-            })
+            setupSubscriptions(stompClient);
         });
         connected();
     }
