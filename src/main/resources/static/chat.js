@@ -5,6 +5,8 @@ $(document).ready(function() {
     function initialState() {
         $("#message").prop("disabled", true);
         $("#sendMessage").prop("disabled", true);
+        $("#userList").prop("disabled", true);
+        $("#newMessages").prop("disabled", true);
     }
 
     function populateParticipants(participants) {
@@ -15,41 +17,69 @@ $(document).ready(function() {
         })
     }
 
-    function setupSubscriptions(stompClient) {
+    function setupSubscriptions() {
         stompClient.subscribe('/topic/chat.message', function(message) {
             $("#newMessages ul").append('<li class="list-group-item">' + message.body + '</li>');
-        })
-        stompClient.subscribe('/app/chat.participants', function(message) {
         })
         stompClient.subscribe('/topic/chat.participants', function(message) {
                 populateParticipants(JSON.parse(message.body));
         })
+        stompClient.subscribe('/app/chat.participants', function(message) {
+        })
+    }
+
+    function handleError(error) {
+        alert(error);
     }
 
     function connect() {
-        var username = $('#username').val();
-        websocket = new SockJS('/ws');
-        stompClient = Stomp.over(websocket);
-        stompClient.connect({username: username}, function(frame) {
-            setupSubscriptions(stompClient);
-        });
-        connected();
+        if (stompClient == null) {
+            websocket = new SockJS('/ws');
+            stompClient = Stomp.over(websocket);
+            stompClient.connect({username: $('#username').val()}, setupSubscriptions, handleError)
+            connected();
+        }
     }
 
     function connected() {
         $("#message").prop("disabled", false);
         $("#sendMessage").prop("disabled", false);
         $("#username").prop("disabled", true);
-        $("#connectButton").prop("value", "Disconnect");
+        $("#connectButton").prop("textContent", "Disconnect");
+        $("#userList").prop("disabled", false);
+        $("#newMessages").prop("disabled", false);
+    }
+
+    function disconnect() {
+		if (stompClient != null) {
+			stompClient.disconnect("", {username: $('#username').val()});
+			stompClient = null;
+		}
+		disconnected();
+    }
+
+    function disconnected() {
+        $("#message").prop("disabled", true);
+        $("#sendMessage").prop("disabled", true);
+        $("#username").prop("disabled", false);
+        $("#connectButton").prop("textContent", "Connect");
+        $("#userList").prop("disabled", true);
+        $("#newMessages").prop("disabled", true);
+        $("#userList ul").empty();
+        $("#newMessages ul").empty();
     }
 
     function sendMessage() {
         var message = $('#message').val();
-        stompClient.send("/app/chat.message", {}, message);
+        stompClient.send("/app/chat.message", {username: $('#username').val()}, message);
     }
 
     $("#connectButton").on("click", function() {
-        connect();
+        if ($("#connectButton").text() == "Connect") {
+            connect();
+        } else {
+            disconnect();
+        }
     })
 
     $("#sendMessage").on("click", function() {

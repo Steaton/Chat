@@ -1,4 +1,4 @@
-package co.de.affinitas.chat.participants.exception;
+package co.seaton.chat.participants.exception;
 
 public class NotAlphaNumericException extends Exception {
 

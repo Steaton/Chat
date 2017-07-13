@@ -1,4 +1,4 @@
-package co.de.affinitas.chat;
+package co.seaton.chat;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
