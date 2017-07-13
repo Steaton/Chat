@@ -15,7 +15,7 @@ public class ConnectedUsers {
 
     // Scalability Issues: Wouldn't work in a cluster.
     // Code Issue: Static stuff is difficult to test hence temporary @VisibleForTesting methods creep in.
-    // Alternative: e.g. RabbitMQ, Database - this would then become a synchronised cache
+    // Alternative: e.g. RabbitMQ, Database - this would then become a synchronised cache.
     private static Map<String, String> connectedUsers = new ConcurrentHashMap<>();
 
     public void joinChat(String sessionId, String username) throws AlreadyConnectedException, NotAlphaNumericException {
