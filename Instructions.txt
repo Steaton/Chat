@@ -1,2 +1,0 @@
-It is a Spring Boot application so simple run Application.java.
-You can access the chat through a browser on http://localhost:9090/chat.html
